@@ -10,5 +10,5 @@
 
 ## TODO
 
-- Simple proxy server
-- Simple file system server 
+- ~~Simple proxy server~~
+- ~~Simple file system server~~
