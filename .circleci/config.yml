@@ -1,9 +1,7 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: golang:1.11
-
+    machine: true
     steps:
       - checkout
             
@@ -13,7 +11,6 @@ jobs:
             make pre-build
             make build-image
 
-          
 workflows:
   version: 2
   build:
