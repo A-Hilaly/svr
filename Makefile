@@ -2,7 +2,6 @@ TAG=v0.0.1
 
 pre-build:
 	GO111MODULE=on go mod download
-	GO111MODULE=on go mod tidy
 
 # compile binary
 build:

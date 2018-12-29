@@ -9,9 +9,11 @@ jobs:
       - run:
           name: build svr
           command: |
-            pwd
-            ls -la
-            echo $GOPATH----$GOROOT
+            apt update && apt upgrade -y
+            wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
+            sudo tar -xvf go1.11.linux-amd64.tar.gz
+            sudo mv go /usr/local
+            
             make pre-build
             make build-image
 

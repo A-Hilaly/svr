@@ -1,5 +1,5 @@
 FROM alpine:latest
 
-ADD svr .
+ADD ./svr .
 
 EXPOSE 8080
