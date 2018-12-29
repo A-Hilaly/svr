@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     machine: true
-    working_directory: ./go/src/github.com/a-hilaly/svr
 
     steps:
       - checkout
@@ -10,13 +9,15 @@ jobs:
       - run:
           name: build svr
           command: |
+            pwd
+            ls -la
+            echo $GOPATH $GOROOT
             make pre-build
             make build-image
 
           
   build-push:
     machine: true
-    working_directory: /go/src/github.com/a-hilaly/svr
 
     steps:
       - checkout
