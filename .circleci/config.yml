@@ -11,7 +11,7 @@ jobs:
           command: |
             pwd
             ls -la
-            echo $GOPATH $GOROOT
+            echo $GOPATH----$GOROOT
             make pre-build
             make build-image
 
