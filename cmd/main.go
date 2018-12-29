@@ -5,10 +5,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/a-hilaly/svr/http2https"
-	"github.com/a-hilaly/svr/httpproxy"
-	"github.com/a-hilaly/svr/httpserver"
 	"github.com/spf13/cobra"
+
+	"github.com/a-hilaly/svr/pkg/http2https"
+	"github.com/a-hilaly/svr/pkg/httpredirect"
+	"github.com/a-hilaly/svr/pkg/httpserver"
 )
 
 var (
@@ -30,22 +31,21 @@ var cmd = &cobra.Command{
 	Short: "A collection of simple HTTP servers",
 	Long: `A collection of simple HTTP servers
 		- Simple HTTP server
-		- Simple HTTP proxy server
+		- Simple redirection server
 		- HTTP to HTTPS proxy server`,
 	Run: func(cmd *cobra.Command, args []string) {
 		switch Server {
 		case "default":
 			log.Println("Simple server")
 			httpserver.Default(Port, Pattern)
-		case "proxy":
+		case "redirect":
 			log.Println("Proxy server")
-			httpserver.New(Port, Pattern, httpproxy.Handler(RedirectURL))
-		case "http2s":
+			httpserver.New(Port, Pattern, httpredirect.Handler(RedirectURL))
+		case "http2https":
 			log.Println("Http to https")
-			httpserver.New(Port, Pattern, http2https.Default())
+			httpserver.New(Port, Pattern, http2https.Handler())
 		default:
-			log.Println("Simple server")
-			httpserver.Default(Port, Pattern)
+			log.Fatalf("Unknown server name %v\n", Server)
 		}
 	},
 }

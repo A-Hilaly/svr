@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func Default() func(http.ResponseWriter, *http.Request) {
+func Handler() func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		target := "https://" + r.Host + r.URL.Path
 		pp := r.URL.Path[1:]
