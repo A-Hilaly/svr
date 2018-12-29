@@ -8,6 +8,8 @@ jobs:
       - run:
           name: build svr
           command: |
+            go version
+            make pre-build
             make build-image
 
           
@@ -18,7 +20,8 @@ jobs:
 
       - run:
           name: build alpha
-          command: |
+          command: 
+            make pre-build
             make build-image
             make push-image
 
