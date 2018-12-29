@@ -1,7 +1,8 @@
 version: 2
 jobs:
   build:
-    machine: true
+    docker:
+      - image: golang:1.11
 
     steps:
       - checkout
@@ -9,52 +10,12 @@ jobs:
       - run:
           name: build svr
           command: |
-            apt update && apt upgrade -y
-            wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
-            sudo tar -xvf go1.11.linux-amd64.tar.gz
-            sudo mv go /usr/local
-            
             make pre-build
             make build-image
 
           
-  build-push:
-    machine: true
-
-    steps:
-      - checkout
-
-      - run:
-          name: build alpha
-          command: 
-            make pre-build
-            make build-image
-            make push-image
-
-      - run:
-          name: docker login
-          command: |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-  
-      - run:
-          name: push
-          command: |
-            docker push ahilaly/app-alpha:v1
-            docker push ahilaly/app-beta:v1-alpine
-
 workflows:
   version: 2
   build:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-               - test
-               - dev
-               - /dev-.*/
-      - build-push:
-          filters:
-            branches:
-              only:
-                - master
+      - build
