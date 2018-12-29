@@ -8,8 +8,7 @@ jobs:
       - run:
           name: build svr
           command: |
-            make pre-build
-            make build-image
+            make compile-image
 
 workflows:
   version: 2
